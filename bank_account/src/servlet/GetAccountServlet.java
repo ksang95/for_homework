@@ -9,18 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import dao.BankAccountDAO;
 import dao.LoanAccountDAO;
 import dao.SavingAccountDAO;
 import service.BankAccountService;
 import service.BankAccountServiceImpl;
 import vo.BankAccountVO;
-import vo.LoanAccountVO;
-import vo.SavingAccountVO;
 
 @WebServlet("/getAccount.do")
 public class GetAccountServlet extends HttpServlet {
