@@ -1,7 +1,5 @@
 package dao;
 
-import org.json.simple.JSONObject;
-
 import vo.BankAccountVO;
 
 public interface BankAccountDAO {
