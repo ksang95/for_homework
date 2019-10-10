@@ -21,9 +21,7 @@ public class JDBCUtil {
 			String url=p.getProperty("url");
 			String user=p.getProperty("user");
 			String pw=p.getProperty("pw");
-			System.out.println(driver);
 			Class.forName(driver);
-			System.out.println("2");
 			con=DriverManager.getConnection(url, user, pw);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
