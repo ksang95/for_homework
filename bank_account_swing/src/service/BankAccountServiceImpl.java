@@ -21,7 +21,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 	}
 
 	@Override
-	public String getAccount(String accountnum) {
+	public BankAccountVO getAccount(String accountnum) {
 		// TODO Auto-generated method stub
 		return dao.getAccount(accountnum);
 	}

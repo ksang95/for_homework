@@ -3,10 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.simple.JSONObject;
 
 import util.JDBCUtil;
 import vo.BankAccountVO;
@@ -47,36 +43,34 @@ public class SavingAccountDAO implements BankAccountDAO {
 			} catch (Exception e) {
 				System.out.println(e);
 			} finally {
-				JDBCUtil.close(con, ps, rs);
+				JDBCUtil.close(con, ps, null);
 			}
 		}
 		return accountnum;
 	}
 
 	@Override
-	public String getAccount(String accountnum) {
+	public BankAccountVO getAccount(String accountnum) {
 		// TODO Auto-generated method stub
 		String sql = "select * from savingaccount where accountnum=?";
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Map<String, String> map=new HashMap<String, String>();
+		SavingAccountVO result=new SavingAccountVO();
 		try {
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, accountnum);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				map.put("name",rs.getString("name"));
-				map.put("term",rs.getString("term"));
-				map.put("monthly",rs.getString("monthly"));
-				map.put("interest",rs.getString("interest"));
-				map.put("rate",rs.getString("rate"));
-				map.put("accountnum",rs.getString("accountnum"));
-				map.put("monthly",rs.getString("monthly"));
-				map.put("total",rs.getString("total"));
-				map.put("refund",rs.getString("refund"));
-				map.put("type", "saving");
+				result.setName(rs.getString("name"));
+				result.setTerm(rs.getInt("term"));
+				result.setMonthly(rs.getInt("monthly"));
+				result.setInterest(rs.getInt("interest"));
+				result.setRate(rs.getInt("rate"));
+				result.setAccountnum(rs.getString("accountnum"));
+				result.setTotal(rs.getInt("total"));
+				result.setRefund(rs.getInt("refund"));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -84,7 +78,7 @@ public class SavingAccountDAO implements BankAccountDAO {
 			JDBCUtil.close(con, ps, rs);
 		}
 
-		return JSONObject.toJSONString(map);
+		return result;
 	}
 
 }
